@@ -1,0 +1,80 @@
+# WordPress Core Files
+wp-config.php
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/
+wp-content/cache/*
+wp-content/object-cache.php
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.project
+.settings/
+.buildpath
+
+# Windsurf IDE
+.windsurf/
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+error_log
+debug.log
+
+# Dependencies (if using npm/composer for dev tools)
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+
+# Build artifacts (if you add build tooling later)
+dist/
+build/
+*.zip
+*.tar.gz
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache
+
+# Environment & Config
+.env
+.env.local
+.env.*.local
+
+# Testing
+phpunit.xml
+.phpunit.result.cache
+tests/_output/
+coverage/
+
+# Version control
+.svn/
+.git/
+.gitattributes

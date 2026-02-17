@@ -281,10 +281,10 @@ class Tracker {
 		}
 
 		$data = [
-			'order_id'    => $order->get_id(),
-			'total_value' => (float) $order->get_total(),
-			'currency'    => $order->get_currency(),
-			'products'    => wp_json_encode( $products ),
+			'order_id' => $order->get_id(),
+			'revenue'  => (float) $order->get_total(),
+			'currency' => $order->get_currency(),
+			'products' => wp_json_encode( $products ),
 		];
 
 		do_action( 'umami_wc_before_purchase', $data, $order );

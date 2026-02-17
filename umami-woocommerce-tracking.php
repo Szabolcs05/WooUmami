@@ -3,7 +3,7 @@
  * Plugin Name:       WooUmami
  * Plugin URI:        https://github.com/Szabolcs05/WooUmami
  * Description:       Integrates Umami Analytics with WooCommerce to track key ecommerce events (add to cart, checkout, purchase, etc.) via Umami custom events.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 5.8
  * Requires PHP:      8.0
  * Author:            Gajár Szabolcs
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Plugin constants.
  */
-define( 'UMAMI_WC_VERSION', '1.0.0' );
+define( 'UMAMI_WC_VERSION', '1.1.0' );
 define( 'UMAMI_WC_FILE', __FILE__ );
 define( 'UMAMI_WC_PATH', plugin_dir_path( __FILE__ ) );
 define( 'UMAMI_WC_URL', plugin_dir_url( __FILE__ ) );
