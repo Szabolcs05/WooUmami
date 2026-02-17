@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Umami WooCommerce Tracking
- * Plugin URI:        https://github.com/your-org/umami-woocommerce-tracking
+ * Plugin Name:       WooUmami
+ * Plugin URI:        https://github.com/Szabolcs05/WooUmami
  * Description:       Integrates Umami Analytics with WooCommerce to track key ecommerce events (add to cart, checkout, purchase, etc.) via Umami custom events.
  * Version:           1.0.0
  * Requires at least: 5.8
  * Requires PHP:      8.0
- * Author:            Your Name
- * Author URI:        https://yourwebsite.com
+ * Author:            Gajár Szabolcs
+ * Author URI:        https://elixify.hu/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       umami-wc-tracking
