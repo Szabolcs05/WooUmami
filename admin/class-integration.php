@@ -81,6 +81,17 @@ class Integration extends \WC_Integration {
 				'default' => 'no',
 			],
 
+			'external_script' => [
+				'title'       => __( 'External Umami Script', 'umami-wc-tracking' ),
+				'type'        => 'checkbox',
+				'label'       => __( 'Another plugin (e.g. Integrate Umami) already loads the Umami tracking script', 'umami-wc-tracking' ),
+				'description' => __(
+					'Enable this if you are using a separate plugin to inject the Umami script tag. WooUmami will skip its own script injection and rely on the existing one. You still need to fill in the Website ID above.',
+					'umami-wc-tracking'
+				),
+				'default'     => 'no',
+			],
+
 			/* ── Events ──────────────────────────────────────── */
 
 			'section_events' => [

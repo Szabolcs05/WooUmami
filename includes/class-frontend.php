@@ -50,9 +50,33 @@ class Frontend {
 	 * -------------------------------------------------------------- */
 
 	/**
+	 * Known script handles used by other Umami plugins.
+	 *
+	 * If any of these are already registered we skip our own injection
+	 * to avoid loading the Umami script twice.
+	 */
+	private const KNOWN_UMAMI_HANDLES = [
+		'umami-analytics',  // WooUmami (this plugin).
+		'umami',            // Common generic handle.
+		'umami-script',     // Integrate Umami / wp-umami.
+		'integrate-umami',  // Alternate Integrate Umami handle.
+		'umami-tracking',   // Other community plugins.
+	];
+
+	/**
 	 * Enqueue the Umami analytics script with async + data-website-id.
+	 *
+	 * Skipped entirely when:
+	 *  - The "External Umami Script" setting is enabled (another plugin loads it).
+	 *  - Any known Umami handle is already registered by another plugin.
 	 */
 	public function enqueue_umami_script(): void {
+
+		// ── External-script mode: another plugin loads Umami. ──
+		if ( $this->settings->is_external_script() ) {
+			return;
+		}
+
 		$script_url = $this->settings->get_script_url();
 		$website_id = $this->settings->get_website_id();
 
@@ -60,9 +84,11 @@ class Frontend {
 			return;
 		}
 
-		// Prevent duplicate injection (another plugin / theme may already load Umami).
-		if ( wp_script_is( 'umami-analytics', 'enqueued' ) || wp_script_is( 'umami-analytics', 'registered' ) ) {
-			return;
+		// Prevent duplicate injection — check every known handle.
+		foreach ( self::KNOWN_UMAMI_HANDLES as $handle ) {
+			if ( wp_script_is( $handle, 'enqueued' ) || wp_script_is( $handle, 'registered' ) ) {
+				return;
+			}
 		}
 
 		wp_enqueue_script(
@@ -94,12 +120,25 @@ class Frontend {
 	/**
 	 * Enqueue our small tracking helper that reads localised data
 	 * and dispatches umami.track() calls.
+	 *
+	 * When in external-script mode, we drop the hard dependency on
+	 * 'umami-analytics' because the script is loaded by another plugin
+	 * under a handle we may not know. The JS uses retry logic to wait
+	 * for `window.umami` regardless.
 	 */
 	public function enqueue_tracking_script(): void {
+
+		$deps = [ 'jquery' ];
+
+		// Only declare a hard dep when we control the Umami script ourselves.
+		if ( ! $this->settings->is_external_script() ) {
+			$deps[] = 'umami-analytics';
+		}
+
 		wp_enqueue_script(
 			'umami-wc-tracking',
 			UMAMI_WC_URL . 'assets/js/umami-wc-tracking.js',
-			[ 'umami-analytics', 'jquery' ],
+			$deps,
 			UMAMI_WC_VERSION,
 			[
 				'strategy'  => 'defer',

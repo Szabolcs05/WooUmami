@@ -68,6 +68,14 @@ class Settings {
 	}
 
 	/**
+	 * Whether the Umami script is loaded by an external plugin
+	 * (e.g. Integrate Umami) and WooUmami should skip injection.
+	 */
+	public function is_external_script(): bool {
+		return 'yes' === ( $this->options['external_script'] ?? 'no' );
+	}
+
+	/**
 	 * Check whether a specific event type is enabled.
 	 *
 	 * Developers can override via filter `umami_wc_event_enabled`.
@@ -89,11 +97,21 @@ class Settings {
 
 	/**
 	 * Returns true when the plugin is fully configured and ready to track.
+	 *
+	 * In external-script mode only enabled + website_id are required,
+	 * because the Umami JS is loaded by another plugin.
 	 */
 	public function is_ready(): bool {
-		return $this->is_enabled()
-			&& '' !== $this->get_script_url()
-			&& '' !== $this->get_website_id();
+		if ( ! $this->is_enabled() || '' === $this->get_website_id() ) {
+			return false;
+		}
+
+		// When not using an external script, we also need the script URL.
+		if ( ! $this->is_external_script() && '' === $this->get_script_url() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/* -----------------------------------------------------------------
