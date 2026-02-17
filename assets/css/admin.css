@@ -1,0 +1,12 @@
+/**
+ * Umami WooCommerce Tracking — Admin Styles
+ *
+ * Minimal styles for the WooCommerce Integration settings page.
+ *
+ * @package Umami_WC
+ */
+
+/* Section separator inside the Integration tab */
+.woocommerce table.form-table th {
+	padding-left: 0;
+}
